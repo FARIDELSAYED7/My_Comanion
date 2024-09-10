@@ -3,22 +3,7 @@ import 'package:my_companionm/core/models/audiomodel.dart';
 import 'audio_player_screen.dart';
 
 class AudioListScreen extends StatelessWidget {
-  final List<Audiomodel> musicList = [
-    Audiomodel(
-        description: "Birds At Morning",
-        path: "audio/birds.mp3",
-        title: "Calm"),
-    Audiomodel(
-        description: "Ocean Sound",
-        path: "audio/oceansound.mp3",
-        title: "Calm"),
-    Audiomodel(
-        description: "Heavy Rain", path: "audio/heavyrain.mp3", title: "Calm"),
-    Audiomodel(
-        description: "Birds At Morning",
-        path: "audio/birds.mp3",
-        title: "Calm"),
-  ];
+  
 
   @override
   Widget build(BuildContext context) {

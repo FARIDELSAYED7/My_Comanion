@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:my_companionm/core/data/todo.dart';
+import 'package:my_companionm/view/screens/note_search_delegate.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -13,49 +14,65 @@ class NotesScreen extends StatefulWidget {
 class _NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Notes",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            Expanded(
-              child: ValueListenableBuilder<Box<Todo>>(
-                valueListenable: Hive.box<Todo>('notes').listenable(),
-                builder: (context, box, _) {
-                  return ListView.builder(
-                    itemCount: box.length,
-                    itemBuilder: (context, index) {
-                      final notes = box.getAt(index)!;
-                      return _buildNoteCard(context, notes, index);
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white, // Set the background color to white
+        body: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "My Notes",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(
+                          context: context, delegate: NoteSearchDelegate());
                     },
-                  );
-                },
+                  ),
+                ],
               ),
-            ),
-          ],
+              Expanded(
+                child: ValueListenableBuilder<Box<Todo>>(
+                  valueListenable: Hive.box<Todo>('notes').listenable(),
+                  builder: (context, box, _) {
+                    return ListView.builder(
+                      itemCount: box.length,
+                      itemBuilder: (context, index) {
+                        final notes = box.getAt(index)!;
+                        return _buildNoteCard(context, notes, index);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _addNewNote(context);
-        },
-        child: const Icon(Icons.add),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _addNewNote(context);
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
 
   Widget _buildNoteCard(BuildContext context, Todo note, int index) {
     return Card(
+      color: Colors.grey[200],
+      elevation: 4,
       child: ListTile(
         title: Text(note.title),
         subtitle: Text(note.mod == null
@@ -155,22 +172,20 @@ class _NotesScreenState extends State<NotesScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Colors.grey[100],
           title: const Text('Edit Note'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: TextField(
-                  expands: true,
-                  maxLines: null,
-                  minLines: null,
-                  autofocus: true,
-                  controller: titleController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(8),
-                    hintText: 'Edit note',
-                  ),
+              TextField(
+                maxLines: null,
+                minLines: null,
+                autofocus: true,
+                controller: titleController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(8),
+                  hintText: 'Edit note',
                 ),
               ),
               ElevatedButton(
@@ -182,7 +197,7 @@ class _NotesScreenState extends State<NotesScreen> {
                     lastDate: DateTime(2100),
                   );
                   if (newDateTime != null) {
-                    dateTime = newDateTime;
+                    dateTime = DateTime.now();
                   }
                 },
                 child: Text(dateTime == null

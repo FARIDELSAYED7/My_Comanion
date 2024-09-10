@@ -99,6 +99,7 @@ class _HomePageState extends State<AiChatScreen> {
         }
       });
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

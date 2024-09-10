@@ -13,18 +13,22 @@ class WelcomeScreen extends StatelessWidget {
     return const Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(
+                flex: 2,
+              ),
               WelcomeImage(),
               SizedBox(height: 40),
               WelcomeTitle(),
               SizedBox(height: 10),
               WelcomeDescription(),
-              SizedBox(height: 40),
+              Spacer(),
               GetStartedButton(),
+              Spacer(),
             ],
           ),
         ),

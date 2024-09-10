@@ -33,14 +33,7 @@ class _NavBarState extends State<NavBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: const Text("My Companion",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
-        centerTitle: true,
-      ),
+     
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,

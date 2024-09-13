@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -42,23 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         message:
                             "Express your anger healthily, without harming yourself or others.",
                         image: "assets/images/angry.png"),
-                    SizedBox(
-                      width: 15,
-                    ),
+                   
                     EmojiPopup(
                         message:
                             "Strength doesn't mean you don't get hurt. It means you learn to cope.",
                         image: "assets/images/sad.png"),
-                    SizedBox(
-                      width: 15,
-                    ),
+                    
                     EmojiPopup(
                         message:
                             "Embrace the ordinary moments. They're often the most precious.",
                         image: "assets/images/smile.png"),
-                    SizedBox(
-                      width: 15,
-                    ),
+                    
                     EmojiPopup(
                         message:
                             "Let your smile change the world, but don't let the world change your smile.",
@@ -77,12 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(
                         Icons.add_circle_rounded,
                         color: Colors.lightBlue,
-                        size: 30,
+                        size: size.width * 0.1,
                       ))
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: size.height * 0.01,
               ),
               Expanded(
                 child: ValueListenableBuilder(
@@ -127,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               ),
                               SizedBox(
-                                width: 5,
+                                width: size.width * 0.01,
                               ),
                               IconButton(
                                 icon: const Icon(Icons.edit),
@@ -181,27 +176,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   if (titleController.text == "") {
                     showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('You Must Add Todo'),
-                          content: Text(todo.title),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                todo.title = titleController.text;
-                                todo.save();
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Save'),
-                            ),
-                          ],
-                        );
-                      });
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('You Must Add Todo'),
+                            content: Text(todo.title),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  todo.title = titleController.text;
+                                  todo.save();
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Save'),
+                              ),
+                            ],
+                          );
+                        });
                   } else {
                     _todoBox.add(todo);
                   }
@@ -248,4 +243,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

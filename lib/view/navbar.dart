@@ -33,7 +33,6 @@ class _NavBarState extends State<NavBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-     
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,

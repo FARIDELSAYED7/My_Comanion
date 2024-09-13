@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_companionm/core/gemini/consts.dart';
@@ -9,7 +10,10 @@ import 'package:my_companionm/view/screens/introduction_page.dart';
 main() async {
   Gemini.init(apiKey: GEMINI_API_KEY);
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   // Initialize Hive
   await Hive.initFlutter();
 
@@ -21,7 +25,7 @@ main() async {
   await Hive.openBox<Todo>('notes');
   await Hive.openBox<Todo>('moods');
 
-  runApp(MyCompanion());
+  runApp(const MyCompanion());
 }
 
 class MyCompanion extends StatelessWidget {

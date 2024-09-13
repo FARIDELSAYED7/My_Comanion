@@ -8,6 +8,7 @@ class IntroductionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return IntroductionScreen(
       globalBackgroundColor: Colors.white,
       showNextButton: true,
@@ -28,20 +29,20 @@ class IntroductionPage extends StatelessWidget {
           reverse: true,
           title: "Welcome to My Companion",
           body: "",
-          decoration: const PageDecoration(
+          decoration: PageDecoration(
             fullScreen: true,
-            contentMargin: EdgeInsets.only(top: 20, bottom: 120),
+            contentMargin: EdgeInsets.only(top: size.height * 0.01, bottom: size.height * 0.1),
             bodyAlignment: Alignment.bottomCenter,
-            titleTextStyle: TextStyle(
+            titleTextStyle: const TextStyle(
               color: Color.fromARGB(255, 6, 39, 23),
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
-            bodyTextStyle: TextStyle(
+            bodyTextStyle: const TextStyle(
               fontSize: 20,
             ),
-            titlePadding: EdgeInsets.all(10),
-            bodyPadding: EdgeInsets.only(bottom: 25),
+            titlePadding: const EdgeInsets.all(10),
+            bodyPadding: const EdgeInsets.only(bottom: 25),
           ),
         ),
         PageViewModel(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class BackgroundImage extends StatelessWidget {
   final String url;
-  const BackgroundImage({super.key,required this.url});
+  const BackgroundImage({super.key, required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,8 @@ class BackgroundPhoto extends StatelessWidget {
             path,
             fit: BoxFit.cover,
           ),
-        ),  ],
+        ),
+      ],
     );
   }
 }
